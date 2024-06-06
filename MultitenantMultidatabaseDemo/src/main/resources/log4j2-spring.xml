@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" name="spring-boot-kafka-log" packages="com.viettel.multitenantmultidatabasedemo">
+    <Appenders>
+        <Kafka name="Kafka" topic="viettel">
+            <PatternLayout pattern="%date %message"/>
+            <Property name="bootstrap.servers">localhost:9092</Property>
+        </Kafka>
+        <Async name="Async">
+            <AppenderRef ref="Kafka"/>
+        </Async>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%style{%d{ISO8601}}{black} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow}: %msg%n%throwable" />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- LOG everything at INFO level -->
+        <Root level="info">
+            <AppenderRef ref="Kafka"/>
+            <AppenderRef ref="Console" />
+        </Root>
+
+        <!-- LOG "com.viettel*" at TRACE level -->
+        <Logger name="com.viettel" level="trace"></Logger>
+        <Logger name="org.apache.kafka" level="WARN" /><!-- avoid recursive logging -->
+    </Loggers>
+
+</Configuration>
