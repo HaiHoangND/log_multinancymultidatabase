@@ -71,6 +71,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             TenantContext.setCurrentTenant(tenantId);
         }
         filterChain.doFilter(request, response);
+        ConnectionStorage.clear();
+        TenantContext.clear();
     }
 
     private String parseJwt(HttpServletRequest request) {
