@@ -17,6 +17,7 @@
     <Loggers>
         <!-- LOG everything at INFO level -->
         <Root level="info">
+<!--            <AppenderRef ref="logstash" />-->
             <AppenderRef ref="Kafka"/>
             <AppenderRef ref="Console" />
         </Root>
