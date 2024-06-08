@@ -32,6 +32,7 @@ services:
     container_name: elasticsearch
     volumes:
       - ./elk/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - esdata1:/usr/share/elasticsearch/data:rw
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -66,3 +67,6 @@ services:
       - multi_tenancy
 networks:
   multi_tenancy:
+volumes:
+  esdata1:
+    driver: local
